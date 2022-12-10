@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_CREDS = credentials('docker_user_pw')
+        DOCKER_CREDS = credentials('oumaymamezni_id_credentials')
     }
     stages {
         stage('build') {
@@ -14,14 +14,14 @@ pipeline {
                 bat 'docker build -t sm:jenkins-built .'
             }
         }
-/*        stage('push to registry'){
+        stage('push to registry'){
             steps{
                 bat " docker login --username ${DOCKER_CREDS_USR} --password ${DOCKER_CREDS_PSW}"
-                bat "docker tag sm:jenkins-built ${DOCKER_CREDS_USR}/sm:${env.buldNumber}"
+                bat "docker tag sm:jenkins-built ${DOCKER_CREDS_USR}/sm:jenkins-built"
                 bat "docker push ${DOCKER_CREDS_USR}/sm:jenkins-built"
             }
 
-        }*/
+        }
         stage('deploy') {
             steps {
                 bat 'docker-compose -p store-man up -d --force-recreate'
