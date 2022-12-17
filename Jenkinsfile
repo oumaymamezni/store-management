@@ -20,7 +20,6 @@ pipeline {
                 bat "docker tag sm:jenkins-built ${DOCKER_CREDS_USR}/sm:jenkins-built"
                 bat "docker push ${DOCKER_CREDS_USR}/sm:jenkins-built"
             }
-
         }
         stage('deploy') {
             steps {
